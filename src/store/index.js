@@ -36,7 +36,7 @@ const store = new Vuex.Store({
     // state の更新を行う
     mutations: {
       addlist(state, payload){
-        state.lists.push({title: payload.title, cards:[]})
+        state.lists.push({ title: payload.title, cards:[] })
       },
     },
     // mutations の呼び出しを行う。非同期通信もここで行う。
@@ -53,12 +53,14 @@ const store = new Vuex.Store({
 
     // subscribeはストアのインスタンスメソッドで全てのmutationの後に呼ばれる
     // 第一引数にmutaionのインスタンス、第二引数にmutaion後のデータの状態を受け取る
-    store.subscribe((mutation, state) => {
-      // localstorageへデータの状態を保存している
-      // 保存する時には上記のように任意のキーをせってして、データを文字列型に変換して保存する・
-      // データを文字列型にするにはJSON.stringify(保存するデータ)でJSON形式に変換する
-      localStorage.setItem('trello-lists', JSON.stringify(state.lists))
-    })
 
-    export default store
 })
+
+store.subscribe((mutation, state) => {
+  // localstorageへデータの状態を保存している
+  // 保存する時には上記のように任意のキーをせってして、データを文字列型に変換して保存する・
+  // データを文字列型にするにはJSON.stringify(保存するデータ)でJSON形式に変換する
+  localStorage.setItem('trello-lists', JSON.stringify(state.lists))
+})
+
+export default store
